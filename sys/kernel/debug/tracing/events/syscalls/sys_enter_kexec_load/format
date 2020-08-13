@@ -1,0 +1,15 @@
+name: sys_enter_kexec_load
+ID: 423
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:unsigned long entry;	offset:16;	size:8;	signed:0;
+	field:unsigned long nr_segments;	offset:24;	size:8;	signed:0;
+	field:struct kexec_segment * segments;	offset:32;	size:8;	signed:0;
+	field:unsigned long flags;	offset:40;	size:8;	signed:0;
+
+print fmt: "entry: 0x%08lx, nr_segments: 0x%08lx, segments: 0x%08lx, flags: 0x%08lx", ((unsigned long)(REC->entry)), ((unsigned long)(REC->nr_segments)), ((unsigned long)(REC->segments)), ((unsigned long)(REC->flags))

@@ -1,0 +1,17 @@
+name: btrfs_cow_block
+ID: 1467
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 root_objectid;	offset:24;	size:8;	signed:0;
+	field:u64 buf_start;	offset:32;	size:8;	signed:0;
+	field:int refs;	offset:40;	size:4;	signed:1;
+	field:u64 cow_start;	offset:48;	size:8;	signed:0;
+	field:int buf_level;	offset:56;	size:4;	signed:1;
+	field:int cow_level;	offset:60;	size:4;	signed:1;
+
+print fmt: "%pU: root=%llu(%s) refs=%d orig_buf=%llu (orig_level=%d) cow_buf=%llu (cow_level=%d)", REC->fsid, REC->root_objectid, ((REC->root_objectid >= -9ULL) || (REC->root_objectid >= 1ULL && REC->root_objectid <= 8ULL)) ? __print_symbolic(REC->root_objectid, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->refs, REC->buf_start, REC->buf_level, REC->cow_start, REC->cow_level

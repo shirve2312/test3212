@@ -1,0 +1,18 @@
+name: xfs_refcount_merge_right_extent
+ID: 1599
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_agnumber_t agno;	offset:12;	size:4;	signed:0;
+	field:xfs_agblock_t i1_startblock;	offset:16;	size:4;	signed:0;
+	field:xfs_extlen_t i1_blockcount;	offset:20;	size:4;	signed:0;
+	field:xfs_nlink_t i1_refcount;	offset:24;	size:4;	signed:0;
+	field:xfs_agblock_t i2_startblock;	offset:28;	size:4;	signed:0;
+	field:xfs_extlen_t i2_blockcount;	offset:32;	size:4;	signed:0;
+	field:xfs_nlink_t i2_refcount;	offset:36;	size:4;	signed:0;
+
+print fmt: "dev %d:%d agno %u agbno %u len %u refcount %u -- agbno %u len %u refcount %u", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->agno, REC->i1_startblock, REC->i1_blockcount, REC->i1_refcount, REC->i2_startblock, REC->i2_blockcount, REC->i2_refcount

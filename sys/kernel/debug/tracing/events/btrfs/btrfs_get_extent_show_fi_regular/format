@@ -1,0 +1,24 @@
+name: btrfs_get_extent_show_fi_regular
+ID: 1488
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 root_obj;	offset:24;	size:8;	signed:0;
+	field:u64 ino;	offset:32;	size:8;	signed:0;
+	field:loff_t isize;	offset:40;	size:8;	signed:1;
+	field:u64 disk_isize;	offset:48;	size:8;	signed:0;
+	field:u64 num_bytes;	offset:56;	size:8;	signed:0;
+	field:u64 ram_bytes;	offset:64;	size:8;	signed:0;
+	field:u64 disk_bytenr;	offset:72;	size:8;	signed:0;
+	field:u64 disk_num_bytes;	offset:80;	size:8;	signed:0;
+	field:u64 extent_offset;	offset:88;	size:8;	signed:0;
+	field:u8 extent_type;	offset:96;	size:1;	signed:0;
+	field:u8 compression;	offset:97;	size:1;	signed:0;
+	field:u64 extent_start;	offset:104;	size:8;	signed:0;
+	field:u64 extent_end;	offset:112;	size:8;	signed:0;
+
+print fmt: "%pU: root=%llu(%s) inode=%llu size=%llu disk_isize=%llu file extent range=[%llu %llu] (num_bytes=%llu ram_bytes=%llu disk_bytenr=%llu disk_num_bytes=%llu extent_offset=%llu type=%s compression=%u", REC->fsid, REC->root_obj, ((REC->root_obj >= -9ULL) || (REC->root_obj >= 1ULL && REC->root_obj <= 8ULL)) ? __print_symbolic(REC->root_obj, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->ino, REC->isize, REC->disk_isize, REC->extent_start, REC->extent_end, REC->num_bytes, REC->ram_bytes, REC->disk_bytenr, REC->disk_num_bytes, REC->extent_offset, __print_symbolic(REC->extent_type, { 0, "INLINE" }, { 1, "REG" }, { 2, "PREALLOC"}), REC->compression

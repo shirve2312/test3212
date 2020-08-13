@@ -1,0 +1,22 @@
+name: wbt_stat
+ID: 1141
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:char name[32];	offset:8;	size:32;	signed:1;
+	field:s64 rmean;	offset:40;	size:8;	signed:1;
+	field:u64 rmin;	offset:48;	size:8;	signed:0;
+	field:u64 rmax;	offset:56;	size:8;	signed:0;
+	field:s64 rnr_samples;	offset:64;	size:8;	signed:1;
+	field:s64 rtime;	offset:72;	size:8;	signed:1;
+	field:s64 wmean;	offset:80;	size:8;	signed:1;
+	field:u64 wmin;	offset:88;	size:8;	signed:0;
+	field:u64 wmax;	offset:96;	size:8;	signed:0;
+	field:s64 wnr_samples;	offset:104;	size:8;	signed:1;
+	field:s64 wtime;	offset:112;	size:8;	signed:1;
+
+print fmt: "%s: rmean=%llu, rmin=%llu, rmax=%llu, rsamples=%llu, wmean=%llu, wmin=%llu, wmax=%llu, wsamples=%llu
+", REC->name, REC->rmean, REC->rmin, REC->rmax, REC->rnr_samples, REC->wmean, REC->wmin, REC->wmax, REC->wnr_samples

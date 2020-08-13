@@ -1,0 +1,5 @@
+MAJOR=202
+MINOR=1
+DEVNAME=xvda1
+DEVTYPE=partition
+PARTN=1

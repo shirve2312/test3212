@@ -1,0 +1,7 @@
+PAT memtype list:
+uncached-minus @ 0xf2000000-0xf2020000
+write-back @ 0xfc000000-0xfc001000
+write-back @ 0xfc002000-0xfc00e000
+write-back @ 0xfc00d000-0xfc00f000
+uncached-minus @ 0xfed00000-0xfed01000
+uncached-minus @ 0xfeffc000-0xfeffd000

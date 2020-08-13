@@ -1,0 +1,17 @@
+name: xfs_da_grow_inode
+ID: 1708
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_ino_t ino;	offset:16;	size:8;	signed:0;
+	field:__data_loc char[] name;	offset:24;	size:4;	signed:1;
+	field:int namelen;	offset:28;	size:4;	signed:1;
+	field:xfs_dahash_t hashval;	offset:32;	size:4;	signed:0;
+	field:xfs_ino_t inumber;	offset:40;	size:8;	signed:0;
+	field:int op_flags;	offset:48;	size:4;	signed:1;
+
+print fmt: "dev %d:%d ino 0x%llx name %.*s namelen %d hashval 0x%x inumber 0x%llx op_flags %s", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->ino, REC->namelen, REC->namelen ? __get_str(name) : ((void *)0), REC->namelen, REC->hashval, REC->inumber, __print_flags(REC->op_flags, "|", { 0x0001, "JUSTCHECK" }, { 0x0002, "RENAME" }, { 0x0004, "ADDNAME" }, { 0x0008, "OKNOENT" }, { 0x0010, "CILOOKUP" })

@@ -1,0 +1,14 @@
+name: sys_enter_getcpu
+ID: 198
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:unsigned * cpup;	offset:16;	size:8;	signed:0;
+	field:unsigned * nodep;	offset:24;	size:8;	signed:0;
+	field:struct getcpu_cache * unused;	offset:32;	size:8;	signed:0;
+
+print fmt: "cpup: 0x%08lx, nodep: 0x%08lx, unused: 0x%08lx", ((unsigned long)(REC->cpup)), ((unsigned long)(REC->nodep)), ((unsigned long)(REC->unused))

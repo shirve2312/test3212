@@ -1,0 +1,26 @@
+nr_tags=64
+nr_reserved_tags=0
+active_queues=0
+
+bitmap_tags:
+depth=64
+busy=3
+cleared=61
+bits_per_word=16
+map_nr=4
+alloc_hint={14, 17, 29, 59, 32, 8, 44, 21, 41, 15, 15, 30, 54, 34, 34}
+wake_batch=8
+wake_index=0
+ws_active=0
+ws={
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+	{.wait_cnt=8, .wait=inactive},
+}
+round_robin=0
+min_shallow_depth=4294967295

@@ -1,0 +1,28 @@
+name: ib_mad_recv_done_handler
+ID: 1510
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 base_version;	offset:8;	size:1;	signed:0;
+	field:u8 mgmt_class;	offset:9;	size:1;	signed:0;
+	field:u8 class_version;	offset:10;	size:1;	signed:0;
+	field:u8 port_num;	offset:11;	size:1;	signed:0;
+	field:u32 qp_num;	offset:12;	size:4;	signed:0;
+	field:u16 status;	offset:16;	size:2;	signed:0;
+	field:u16 class_specific;	offset:18;	size:2;	signed:0;
+	field:u32 length;	offset:20;	size:4;	signed:0;
+	field:u64 tid;	offset:24;	size:8;	signed:0;
+	field:u8 method;	offset:32;	size:1;	signed:0;
+	field:u8 sl;	offset:33;	size:1;	signed:0;
+	field:u16 attr_id;	offset:34;	size:2;	signed:0;
+	field:u32 attr_mod;	offset:36;	size:4;	signed:0;
+	field:u16 src_qp;	offset:40;	size:2;	signed:0;
+	field:u16 wc_status;	offset:42;	size:2;	signed:0;
+	field:u32 slid;	offset:44;	size:4;	signed:0;
+	field:u32 dev_index;	offset:48;	size:4;	signed:0;
+	field:u16 pkey;	offset:52;	size:2;	signed:0;
+
+print fmt: "%d:%d QP%d : RECV WC Status %d : length %d : hdr : base_ver 0x%02x class 0x%02x class_ver 0x%02x method 0x%02x status 0x%04x class_specific 0x%04x tid 0x%016llx attr_id 0x%04x attr_mod 0x%08x slid 0x%08x src QP%d, sl %d pkey 0x%04x", REC->dev_index, REC->port_num, REC->qp_num, REC->wc_status, REC->length, REC->base_version, REC->mgmt_class, REC->class_version, REC->method, (__u16)__builtin_bswap16((__u16)(( __u16)(__be16)(REC->status))), (__u16)__builtin_bswap16((__u16)(( __u16)(__be16)(REC->class_specific))), (__u64)__builtin_bswap64((__u64)(( __u64)(__be64)(REC->tid))), (__u16)__builtin_bswap16((__u16)(( __u16)(__be16)(REC->attr_id))), (__u32)__builtin_bswap32((__u32)(( __u32)(__be32)(REC->attr_mod))), REC->slid, REC->src_qp, REC->sl, REC->pkey

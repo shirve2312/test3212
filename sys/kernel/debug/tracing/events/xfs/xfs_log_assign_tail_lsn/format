@@ -1,0 +1,14 @@
+name: xfs_log_assign_tail_lsn
+ID: 1848
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_lsn_t new_lsn;	offset:16;	size:8;	signed:1;
+	field:xfs_lsn_t old_lsn;	offset:24;	size:8;	signed:1;
+	field:xfs_lsn_t last_sync_lsn;	offset:32;	size:8;	signed:1;
+
+print fmt: "dev %d:%d new tail lsn %d/%d, old lsn %d/%d, last sync %d/%d", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), ((uint)((REC->new_lsn)>>32)), ((uint)(REC->new_lsn)), ((uint)((REC->old_lsn)>>32)), ((uint)(REC->old_lsn)), ((uint)((REC->last_sync_lsn)>>32)), ((uint)(REC->last_sync_lsn))

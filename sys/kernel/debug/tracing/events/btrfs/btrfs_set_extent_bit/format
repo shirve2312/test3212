@@ -1,0 +1,17 @@
+name: btrfs_set_extent_bit
+ID: 1430
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:unsigned owner;	offset:24;	size:4;	signed:0;
+	field:u64 ino;	offset:32;	size:8;	signed:0;
+	field:u64 rootid;	offset:40;	size:8;	signed:0;
+	field:u64 start;	offset:48;	size:8;	signed:0;
+	field:u64 len;	offset:56;	size:8;	signed:0;
+	field:unsigned set_bits;	offset:64;	size:4;	signed:0;
+
+print fmt: "%pU: io_tree=%s ino=%llu root=%llu start=%llu len=%llu set_bits=%s", REC->fsid, __print_symbolic(REC->owner, { IO_TREE_FS_INFO_FREED_EXTENTS0, "FREED_EXTENTS0" }, { IO_TREE_FS_INFO_FREED_EXTENTS1, "FREED_EXTENTS1" }, { IO_TREE_INODE_IO, "INODE_IO" }, { IO_TREE_INODE_IO_FAILURE, "INODE_IO_FAILURE" }, { IO_TREE_RELOC_BLOCKS, "RELOC_BLOCKS" }, { IO_TREE_TRANS_DIRTY_PAGES, "TRANS_DIRTY_PAGES" }, { IO_TREE_ROOT_DIRTY_LOG_PAGES, "ROOT_DIRTY_LOG_PAGES" }, { IO_TREE_SELFTEST, "SELFTEST" }), REC->ino, REC->rootid, REC->start, REC->len, __print_flags(REC->set_bits, "|", { (1U << 0), "DIRTY"}, { (1U << 1), "UPTODATE"}, { (1U << 2), "LOCKED"}, { (1U << 3), "NEW"}, { (1U << 4), "DELALLOC"}, { (1U << 5), "DEFRAG"}, { (1U << 6), "BOUNDARY"}, { (1U << 7), "NODATASUM"}, { (1U << 8), "CLEAR_META_RESV"}, { (1U << 9), "NEED_WAIT"}, { (1U << 10), "DAMAGED"}, { (1U << 11), "NORESERVE"}, { (1U << 12), "QGROUP_RESERVED"}, { (1U << 13), "CLEAR_DATA_RESV"}, { (1U << 14), "DELALLOC_NEW"})

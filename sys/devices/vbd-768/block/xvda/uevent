@@ -1,0 +1,4 @@
+MAJOR=202
+MINOR=0
+DEVNAME=xvda
+DEVTYPE=disk

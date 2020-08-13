@@ -1,0 +1,13 @@
+name: mpx_bounds_register_exception
+ID: 124
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:void * addr_referenced;	offset:8;	size:8;	signed:0;
+	field:u64 lower_bound;	offset:16;	size:8;	signed:0;
+	field:u64 upper_bound;	offset:24;	size:8;	signed:0;
+
+print fmt: "address referenced: 0x%p bounds: lower: 0x%llx ~upper: 0x%llx", REC->addr_referenced, REC->lower_bound, ~REC->upper_bound

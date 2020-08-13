@@ -1,0 +1,17 @@
+name: sys_enter_io_pgetevents
+ID: 900
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:aio_context_t ctx_id;	offset:16;	size:8;	signed:0;
+	field:long min_nr;	offset:24;	size:8;	signed:0;
+	field:long nr;	offset:32;	size:8;	signed:0;
+	field:struct io_event * events;	offset:40;	size:8;	signed:0;
+	field:struct __kernel_timespec * timeout;	offset:48;	size:8;	signed:0;
+	field:const struct __aio_sigset * usig;	offset:56;	size:8;	signed:0;
+
+print fmt: "ctx_id: 0x%08lx, min_nr: 0x%08lx, nr: 0x%08lx, events: 0x%08lx, timeout: 0x%08lx, usig: 0x%08lx", ((unsigned long)(REC->ctx_id)), ((unsigned long)(REC->min_nr)), ((unsigned long)(REC->nr)), ((unsigned long)(REC->events)), ((unsigned long)(REC->timeout)), ((unsigned long)(REC->usig))

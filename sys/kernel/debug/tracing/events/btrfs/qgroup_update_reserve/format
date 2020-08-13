@@ -1,0 +1,15 @@
+name: qgroup_update_reserve
+ID: 1440
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 qgid;	offset:24;	size:8;	signed:0;
+	field:u64 cur_reserved;	offset:32;	size:8;	signed:0;
+	field:s64 diff;	offset:40;	size:8;	signed:1;
+	field:int type;	offset:48;	size:4;	signed:1;
+
+print fmt: "%pU: qgid=%llu type=%s cur_reserved=%llu diff=%lld", REC->fsid, REC->qgid, __print_symbolic(REC->type, { BTRFS_QGROUP_RSV_DATA, "DATA" }, { BTRFS_QGROUP_RSV_META_PERTRANS, "META_PERTRANS" }, { BTRFS_QGROUP_RSV_META_PREALLOC, "META_PREALLOC" }), REC->cur_reserved, REC->diff

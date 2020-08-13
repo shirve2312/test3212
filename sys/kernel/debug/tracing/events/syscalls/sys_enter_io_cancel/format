@@ -1,0 +1,14 @@
+name: sys_enter_io_cancel
+ID: 904
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:aio_context_t ctx_id;	offset:16;	size:8;	signed:0;
+	field:struct iocb * iocb;	offset:24;	size:8;	signed:0;
+	field:struct io_event * result;	offset:32;	size:8;	signed:0;
+
+print fmt: "ctx_id: 0x%08lx, iocb: 0x%08lx, result: 0x%08lx", ((unsigned long)(REC->ctx_id)), ((unsigned long)(REC->iocb)), ((unsigned long)(REC->result))

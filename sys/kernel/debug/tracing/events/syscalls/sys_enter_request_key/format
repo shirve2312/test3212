@@ -1,0 +1,15 @@
+name: sys_enter_request_key
+ID: 1113
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:const char * _type;	offset:16;	size:8;	signed:0;
+	field:const char * _description;	offset:24;	size:8;	signed:0;
+	field:const char * _callout_info;	offset:32;	size:8;	signed:0;
+	field:key_serial_t destringid;	offset:40;	size:8;	signed:0;
+
+print fmt: "_type: 0x%08lx, _description: 0x%08lx, _callout_info: 0x%08lx, destringid: 0x%08lx", ((unsigned long)(REC->_type)), ((unsigned long)(REC->_description)), ((unsigned long)(REC->_callout_info)), ((unsigned long)(REC->destringid))

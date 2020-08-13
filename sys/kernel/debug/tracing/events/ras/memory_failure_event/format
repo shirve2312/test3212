@@ -1,0 +1,13 @@
+name: memory_failure_event
+ID: 1317
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:unsigned long pfn;	offset:8;	size:8;	signed:0;
+	field:int type;	offset:16;	size:4;	signed:1;
+	field:int result;	offset:20;	size:4;	signed:1;
+
+print fmt: "pfn %#lx: recovery action for %s: %s", REC->pfn, __print_symbolic(REC->type, { 0, "reserved kernel page" }, { 1, "high-order kernel page" }, { 2, "kernel slab page" }, { 3, "different compound page after locking" }, { 4, "huge page already hardware poisoned" }, { 5, "huge page" }, { 6, "free huge page" }, { 8, "unmapping failed page" }, { 9, "dirty swapcache page" }, { 10, "clean swapcache page" }, { 11, "dirty mlocked LRU page" }, { 12, "clean mlocked LRU page" }, { 13, "dirty unevictable LRU page" }, { 14, "clean unevictable LRU page" }, { 15, "dirty LRU page" }, { 16, "clean LRU page" }, { 17, "already truncated LRU page" }, { 18, "free buddy page" }, { 19, "free buddy page (2nd try)" }, { 21, "unknown page" }), __print_symbolic(REC->result, { 0, "Ignored" }, { 1, "Failed" }, { 2, "Delayed" }, { 3, "Recovered" })

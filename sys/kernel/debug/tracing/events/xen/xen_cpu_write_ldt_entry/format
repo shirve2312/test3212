@@ -1,0 +1,13 @@
+name: xen_cpu_write_ldt_entry
+ID: 28
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:struct desc_struct * dt;	offset:8;	size:8;	signed:0;
+	field:int entrynum;	offset:16;	size:4;	signed:1;
+	field:u64 desc;	offset:24;	size:8;	signed:0;
+
+print fmt: "dt %p  entrynum %d  entry %016llx", REC->dt, REC->entrynum, (unsigned long long)REC->desc

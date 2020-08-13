@@ -1,0 +1,4 @@
+### global filter ###
+# Use this to set filters for multiple events.
+# Only events with the given fields will be affected.
+# If no events are modified, an error message will be displayed here

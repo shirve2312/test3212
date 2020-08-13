@@ -1,0 +1,20 @@
+name: run_delayed_data_ref
+ID: 1472
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 bytenr;	offset:24;	size:8;	signed:0;
+	field:u64 num_bytes;	offset:32;	size:8;	signed:0;
+	field:int action;	offset:40;	size:4;	signed:1;
+	field:u64 parent;	offset:48;	size:8;	signed:0;
+	field:u64 ref_root;	offset:56;	size:8;	signed:0;
+	field:u64 owner;	offset:64;	size:8;	signed:0;
+	field:u64 offset;	offset:72;	size:8;	signed:0;
+	field:int type;	offset:80;	size:4;	signed:1;
+	field:u64 seq;	offset:88;	size:8;	signed:0;
+
+print fmt: "%pU: bytenr=%llu num_bytes=%llu action=%s parent=%llu(%s) ref_root=%llu(%s) owner=%llu offset=%llu type=%s seq=%llu", REC->fsid, REC->bytenr, REC->num_bytes, __print_symbolic(REC->action, { 1, "ADD_DELAYED_REF" }, { 2, "DROP_DELAYED_REF" }, { 3, "ADD_DELAYED_EXTENT" }, { 4, "UPDATE_DELAYED_HEAD" }), REC->parent, ((REC->parent >= -9ULL) || (REC->parent >= 1ULL && REC->parent <= 8ULL)) ? __print_symbolic(REC->parent, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->ref_root, ((REC->ref_root >= -9ULL) || (REC->ref_root >= 1ULL && REC->ref_root <= 8ULL)) ? __print_symbolic(REC->ref_root, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->owner, REC->offset, __print_symbolic(REC->type, { 176, "TREE_BLOCK_REF" }, { 178, "EXTENT_DATA_REF" }, { 180, "EXTENT_REF_V0" }, { 182, "SHARED_BLOCK_REF" }, { 184, "SHARED_DATA_REF" }), REC->seq

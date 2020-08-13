@@ -1,0 +1,14 @@
+name: sys_enter_timer_create
+ID: 396
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:const clockid_t which_clock;	offset:16;	size:8;	signed:0;
+	field:struct sigevent * timer_event_spec;	offset:24;	size:8;	signed:0;
+	field:timer_t * created_timer_id;	offset:32;	size:8;	signed:0;
+
+print fmt: "which_clock: 0x%08lx, timer_event_spec: 0x%08lx, created_timer_id: 0x%08lx", ((unsigned long)(REC->which_clock)), ((unsigned long)(REC->timer_event_spec)), ((unsigned long)(REC->created_timer_id))

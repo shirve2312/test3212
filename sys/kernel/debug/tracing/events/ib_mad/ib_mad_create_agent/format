@@ -1,0 +1,15 @@
+name: ib_mad_create_agent
+ID: 1507
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u32 dev_index;	offset:8;	size:4;	signed:0;
+	field:u32 hi_tid;	offset:12;	size:4;	signed:0;
+	field:u8 port_num;	offset:16;	size:1;	signed:0;
+	field:u8 mgmt_class;	offset:17;	size:1;	signed:0;
+	field:u8 mgmt_class_version;	offset:18;	size:1;	signed:0;
+
+print fmt: "%d:%d mad agent : hi_tid 0x%08x class 0x%02x class_ver 0x%02x", REC->dev_index, REC->port_num, REC->hi_tid, REC->mgmt_class, REC->mgmt_class_version

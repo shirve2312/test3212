@@ -1,0 +1,15 @@
+name: btrfs_trigger_flush
+ID: 1465
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 flags;	offset:24;	size:8;	signed:0;
+	field:u64 bytes;	offset:32;	size:8;	signed:0;
+	field:int flush;	offset:40;	size:4;	signed:1;
+	field:__data_loc char[] reason;	offset:44;	size:4;	signed:1;
+
+print fmt: "%pU: %s: flush=%d(%s) flags=%llu(%s) bytes=%llu", REC->fsid, __get_str(reason), REC->flush, __print_symbolic(REC->flush, { BTRFS_RESERVE_NO_FLUSH, "BTRFS_RESERVE_NO_FLUSH"}, { BTRFS_RESERVE_FLUSH_LIMIT, "BTRFS_RESERVE_FLUSH_LIMIT"}, { BTRFS_RESERVE_FLUSH_ALL, "BTRFS_RESERVE_FLUSH_ALL"}), REC->flags, __print_flags((unsigned long)REC->flags, "|", { (1ULL << 0), "DATA"}, { (1ULL << 1), "SYSTEM"}, { (1ULL << 2), "METADATA"}, { (1ULL << 3), "RAID0"}, { (1ULL << 4), "RAID1"}, { (1ULL << 5), "DUP"}, { (1ULL << 6), "RAID10"}, { (1ULL << 7), "RAID5"}, { (1ULL << 8), "RAID6"}), REC->bytes

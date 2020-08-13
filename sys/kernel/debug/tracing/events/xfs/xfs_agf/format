@@ -1,0 +1,24 @@
+name: xfs_agf
+ID: 1815
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_agnumber_t agno;	offset:12;	size:4;	signed:0;
+	field:int flags;	offset:16;	size:4;	signed:1;
+	field:__u32 length;	offset:20;	size:4;	signed:0;
+	field:__u32 bno_root;	offset:24;	size:4;	signed:0;
+	field:__u32 cnt_root;	offset:28;	size:4;	signed:0;
+	field:__u32 bno_level;	offset:32;	size:4;	signed:0;
+	field:__u32 cnt_level;	offset:36;	size:4;	signed:0;
+	field:__u32 flfirst;	offset:40;	size:4;	signed:0;
+	field:__u32 fllast;	offset:44;	size:4;	signed:0;
+	field:__u32 flcount;	offset:48;	size:4;	signed:0;
+	field:__u32 freeblks;	offset:52;	size:4;	signed:0;
+	field:__u32 longest;	offset:56;	size:4;	signed:0;
+	field:unsigned long caller_ip;	offset:64;	size:8;	signed:0;
+
+print fmt: "dev %d:%d agno %u flags %s length %u roots b %u c %u levels b %u c %u flfirst %u fllast %u flcount %u freeblks %u longest %u caller %pS", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->agno, __print_flags(REC->flags, "|", { 0x00000001, "MAGICNUM" }, { 0x00000002, "VERSIONNUM" }, { 0x00000004, "SEQNO" }, { 0x00000008, "LENGTH" }, { 0x00000010, "ROOTS" }, { 0x00000020, "LEVELS" }, { 0x00000040, "FLFIRST" }, { 0x00000080, "FLLAST" }, { 0x00000100, "FLCOUNT" }, { 0x00000200, "FREEBLKS" }, { 0x00000400, "LONGEST" }, { 0x00000800, "BTREEBLKS" }, { 0x00001000, "UUID" }, { 0x00002000, "RMAP_BLOCKS" }, { 0x00004000, "REFCOUNT_BLOCKS" }, { 0x00008000, "REFCOUNT_ROOT" }, { 0x00010000, "REFCOUNT_LEVEL" }, { 0x00020000, "SPARE64" }), REC->length, REC->bno_root, REC->cnt_root, REC->bno_level, REC->cnt_level, REC->flfirst, REC->fllast, REC->flcount, REC->freeblks, REC->longest, (void *)REC->caller_ip

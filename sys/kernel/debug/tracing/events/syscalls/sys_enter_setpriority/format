@@ -1,0 +1,14 @@
+name: sys_enter_setpriority
+ID: 266
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:int which;	offset:16;	size:8;	signed:0;
+	field:int who;	offset:24;	size:8;	signed:0;
+	field:int niceval;	offset:32;	size:8;	signed:0;
+
+print fmt: "which: 0x%08lx, who: 0x%08lx, niceval: 0x%08lx", ((unsigned long)(REC->which)), ((unsigned long)(REC->who)), ((unsigned long)(REC->niceval))

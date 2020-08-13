@@ -1,0 +1,21 @@
+name: btrfs_get_extent
+ID: 1490
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 root_objectid;	offset:24;	size:8;	signed:0;
+	field:u64 ino;	offset:32;	size:8;	signed:0;
+	field:u64 start;	offset:40;	size:8;	signed:0;
+	field:u64 len;	offset:48;	size:8;	signed:0;
+	field:u64 orig_start;	offset:56;	size:8;	signed:0;
+	field:u64 block_start;	offset:64;	size:8;	signed:0;
+	field:u64 block_len;	offset:72;	size:8;	signed:0;
+	field:unsigned long flags;	offset:80;	size:8;	signed:0;
+	field:int refs;	offset:88;	size:4;	signed:1;
+	field:unsigned int compress_type;	offset:92;	size:4;	signed:0;
+
+print fmt: "%pU: root=%llu(%s) ino=%llu start=%llu len=%llu orig_start=%llu block_start=%llu(%s) block_len=%llu flags=%s refs=%u compress_type=%u", REC->fsid, REC->root_objectid, ((REC->root_objectid >= -9ULL) || (REC->root_objectid >= 1ULL && REC->root_objectid <= 8ULL)) ? __print_symbolic(REC->root_objectid, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->ino, REC->start, REC->len, REC->orig_start, REC->block_start, (REC->block_start >= ((u64)-4)) ? "-" : __print_symbolic(REC->block_start, { ((u64)-4), "LAST_BYTE" }, { ((u64)-3), "HOLE" }, { ((u64)-2), "INLINE" }, { ((u64)-1), "DELALLOC" }), REC->block_len, __print_flags(REC->flags, "|", { (1 << EXTENT_FLAG_PINNED), "PINNED" }, { (1 << EXTENT_FLAG_COMPRESSED), "COMPRESSED" }, { (1 << EXTENT_FLAG_PREALLOC), "PREALLOC" }, { (1 << EXTENT_FLAG_LOGGING), "LOGGING" }, { (1 << EXTENT_FLAG_FILLING), "FILLING" }, { (1 << EXTENT_FLAG_FS_MAPPING), "FS_MAPPING" }), REC->refs, REC->compress_type

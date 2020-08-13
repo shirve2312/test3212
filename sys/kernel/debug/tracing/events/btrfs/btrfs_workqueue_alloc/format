@@ -1,0 +1,14 @@
+name: btrfs_workqueue_alloc
+ID: 1449
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:const void * wq;	offset:24;	size:8;	signed:0;
+	field:__data_loc char[] name;	offset:32;	size:4;	signed:1;
+	field:int high;	offset:36;	size:4;	signed:1;
+
+print fmt: "%pU: name=%s%s wq=%p", REC->fsid, __get_str(name), __print_flags(REC->high, "", {(WQ_HIGHPRI), "-high"}), REC->wq

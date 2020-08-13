@@ -1,0 +1,13 @@
+name: btrfs_qgroup_account_extents
+ID: 1445
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 bytenr;	offset:24;	size:8;	signed:0;
+	field:u64 num_bytes;	offset:32;	size:8;	signed:0;
+
+print fmt: "%pU: bytenr=%llu num_bytes=%llu", REC->fsid, (unsigned long long)REC->bytenr, (unsigned long long)REC->num_bytes

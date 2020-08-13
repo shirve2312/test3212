@@ -1,0 +1,21 @@
+name: btrfs_prelim_ref_merge
+ID: 1436
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 root_id;	offset:24;	size:8;	signed:0;
+	field:u64 objectid;	offset:32;	size:8;	signed:0;
+	field:u8 type;	offset:40;	size:1;	signed:0;
+	field:u64 offset;	offset:48;	size:8;	signed:0;
+	field:int level;	offset:56;	size:4;	signed:1;
+	field:int old_count;	offset:60;	size:4;	signed:1;
+	field:u64 parent;	offset:64;	size:8;	signed:0;
+	field:u64 bytenr;	offset:72;	size:8;	signed:0;
+	field:int mod_count;	offset:80;	size:4;	signed:1;
+	field:u64 tree_size;	offset:88;	size:8;	signed:0;
+
+print fmt: "%pU: root_id=%llu key=[%llu,%u,%llu] level=%d count=[%d+%d=%d] parent=%llu wanted_disk_byte=%llu nodes=%llu", REC->fsid, REC->root_id, REC->objectid, REC->type, REC->offset, REC->level, REC->old_count, REC->mod_count, REC->old_count + REC->mod_count, REC->parent, REC->bytenr, REC->tree_size

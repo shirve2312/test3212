@@ -1,0 +1,11 @@
+name: xen_mc_flush_reason
+ID: 45
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:enum xen_mc_flush_reason reason;	offset:8;	size:4;	signed:0;
+
+print fmt: "flush reason %s", (REC->reason == XEN_MC_FL_NONE) ? "NONE" : (REC->reason == XEN_MC_FL_BATCH) ? "BATCH" : (REC->reason == XEN_MC_FL_ARGS) ? "ARGS" : (REC->reason == XEN_MC_FL_CALLBACK) ? "CALLBACK" : "??"

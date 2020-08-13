@@ -1,0 +1,13 @@
+name: qgroup_num_dirty_extents
+ID: 1443
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 transid;	offset:24;	size:8;	signed:0;
+	field:u64 num_dirty_extents;	offset:32;	size:8;	signed:0;
+
+print fmt: "%pU: transid=%llu num_dirty_extents=%llu", REC->fsid, REC->transid, REC->num_dirty_extents

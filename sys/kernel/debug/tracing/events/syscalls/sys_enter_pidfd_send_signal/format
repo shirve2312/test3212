@@ -1,0 +1,15 @@
+name: sys_enter_pidfd_send_signal
+ID: 182
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:int pidfd;	offset:16;	size:8;	signed:0;
+	field:int sig;	offset:24;	size:8;	signed:0;
+	field:siginfo_t * info;	offset:32;	size:8;	signed:0;
+	field:unsigned int flags;	offset:40;	size:8;	signed:0;
+
+print fmt: "pidfd: 0x%08lx, sig: 0x%08lx, info: 0x%08lx, flags: 0x%08lx", ((unsigned long)(REC->pidfd)), ((unsigned long)(REC->sig)), ((unsigned long)(REC->info)), ((unsigned long)(REC->flags))

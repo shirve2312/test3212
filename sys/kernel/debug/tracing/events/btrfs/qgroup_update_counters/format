@@ -1,0 +1,16 @@
+name: qgroup_update_counters
+ID: 1441
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 qgid;	offset:24;	size:8;	signed:0;
+	field:u64 old_rfer;	offset:32;	size:8;	signed:0;
+	field:u64 old_excl;	offset:40;	size:8;	signed:0;
+	field:u64 cur_old_count;	offset:48;	size:8;	signed:0;
+	field:u64 cur_new_count;	offset:56;	size:8;	signed:0;
+
+print fmt: "%pU: qgid=%llu old_rfer=%llu old_excl=%llu cur_old_count=%llu cur_new_count=%llu", REC->fsid, REC->qgid, REC->old_rfer, REC->old_excl, REC->cur_old_count, REC->cur_new_count

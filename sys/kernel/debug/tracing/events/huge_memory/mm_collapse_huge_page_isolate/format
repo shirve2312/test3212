@@ -1,0 +1,15 @@
+name: mm_collapse_huge_page_isolate
+ID: 607
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:unsigned long pfn;	offset:8;	size:8;	signed:0;
+	field:int none_or_zero;	offset:16;	size:4;	signed:1;
+	field:int referenced;	offset:20;	size:4;	signed:1;
+	field:bool writable;	offset:24;	size:1;	signed:0;
+	field:int status;	offset:28;	size:4;	signed:1;
+
+print fmt: "scan_pfn=0x%lx, none_or_zero=%d, referenced=%d, writable=%d, status=%s", REC->pfn, REC->none_or_zero, REC->referenced, REC->writable, __print_symbolic(REC->status, {0, "failed"}, {1, "succeeded"}, {2, "pmd_null"}, {3, "exceed_none_pte"}, {4, "pte_non_present"}, {5, "no_writable_page"}, {6, "lack_referenced_page"}, {7, "page_null"}, {8, "scan_aborted"}, {9, "not_suitable_page_count"}, {10, "page_not_in_lru"}, {11, "page_locked"}, {12, "page_not_anon"}, {13, "page_compound"}, {14, "no_process_for_page"}, {15, "vma_null"}, {16, "vma_check_failed"}, {17, "not_suitable_address_range"}, {18, "page_swap_cache"}, {19, "could_not_delete_page_from_lru"}, {20, "alloc_huge_page_failed"}, {21, "ccgroup_charge_failed"}, {22, "exceed_swap_pte"}, {23, "truncated"})

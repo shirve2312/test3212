@@ -1,0 +1,26 @@
+name: ib_mad_send_done_handler
+ID: 1511
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 port_num;	offset:8;	size:1;	signed:0;
+	field:u8 base_version;	offset:9;	size:1;	signed:0;
+	field:u8 mgmt_class;	offset:10;	size:1;	signed:0;
+	field:u8 class_version;	offset:11;	size:1;	signed:0;
+	field:u32 qp_num;	offset:12;	size:4;	signed:0;
+	field:u64 wrtid;	offset:16;	size:8;	signed:0;
+	field:u16 status;	offset:24;	size:2;	signed:0;
+	field:u16 wc_status;	offset:26;	size:2;	signed:0;
+	field:u32 length;	offset:28;	size:4;	signed:0;
+	field:void * agent_priv;	offset:32;	size:8;	signed:0;
+	field:unsigned long timeout;	offset:40;	size:8;	signed:0;
+	field:u32 dev_index;	offset:48;	size:4;	signed:0;
+	field:int retries_left;	offset:52;	size:4;	signed:1;
+	field:int max_retries;	offset:56;	size:4;	signed:1;
+	field:int retry;	offset:60;	size:4;	signed:1;
+	field:u8 method;	offset:64;	size:1;	signed:0;
+
+print fmt: "%d:%d QP%d : SEND WC Status %d : agent %p: wrtid 0x%llx %d/%d retries(%d) timeout %lu length %d: hdr : base_ver 0x%x class 0x%x class_ver 0x%x method 0x%x status 0x%x", REC->dev_index, REC->port_num, REC->qp_num, REC->wc_status, REC->agent_priv, (__u64)__builtin_bswap64((__u64)(( __u64)(__be64)(REC->wrtid))), REC->retries_left, REC->max_retries, REC->retry, REC->timeout, REC->length, REC->base_version, REC->mgmt_class, REC->class_version, REC->method, (__u16)__builtin_bswap16((__u16)(( __u16)(__be16)(REC->status)))

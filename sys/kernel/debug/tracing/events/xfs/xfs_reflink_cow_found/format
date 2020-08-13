@@ -1,0 +1,16 @@
+name: xfs_reflink_cow_found
+ID: 1562
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_ino_t ino;	offset:16;	size:8;	signed:0;
+	field:xfs_fileoff_t lblk;	offset:24;	size:8;	signed:0;
+	field:xfs_extlen_t len;	offset:32;	size:4;	signed:0;
+	field:xfs_fsblock_t pblk;	offset:40;	size:8;	signed:0;
+	field:int state;	offset:48;	size:4;	signed:1;
+
+print fmt: "dev %d:%d ino 0x%llx lblk 0x%llx len 0x%x pblk %llu st %d", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->ino, REC->lblk, REC->len, REC->pblk, REC->state

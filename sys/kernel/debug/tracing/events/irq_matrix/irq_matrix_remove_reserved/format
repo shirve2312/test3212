@@ -1,0 +1,14 @@
+name: irq_matrix_remove_reserved
+ID: 342
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:unsigned int online_maps;	offset:8;	size:4;	signed:0;
+	field:unsigned int global_available;	offset:12;	size:4;	signed:0;
+	field:unsigned int global_reserved;	offset:16;	size:4;	signed:0;
+	field:unsigned int total_allocated;	offset:20;	size:4;	signed:0;
+
+print fmt: "online_maps=%d global_avl=%u, global_rsvd=%u, total_alloc=%u", REC->online_maps, REC->global_available, REC->global_reserved, REC->total_allocated

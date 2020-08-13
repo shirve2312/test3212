@@ -1,0 +1,12 @@
+name: sys_enter_timer_delete
+ID: 388
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:timer_t timer_id;	offset:16;	size:8;	signed:0;
+
+print fmt: "timer_id: 0x%08lx", ((unsigned long)(REC->timer_id))

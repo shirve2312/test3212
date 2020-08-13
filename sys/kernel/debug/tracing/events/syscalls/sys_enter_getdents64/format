@@ -1,0 +1,14 @@
+name: sys_enter_getdents64
+ID: 738
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:unsigned int fd;	offset:16;	size:8;	signed:0;
+	field:struct linux_dirent64 * dirent;	offset:24;	size:8;	signed:0;
+	field:unsigned int count;	offset:32;	size:8;	signed:0;
+
+print fmt: "fd: 0x%08lx, dirent: 0x%08lx, count: 0x%08lx", ((unsigned long)(REC->fd)), ((unsigned long)(REC->dirent)), ((unsigned long)(REC->count))

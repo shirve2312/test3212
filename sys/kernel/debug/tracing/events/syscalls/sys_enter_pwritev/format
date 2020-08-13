@@ -1,0 +1,16 @@
+name: sys_enter_pwritev
+ID: 664
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:unsigned long fd;	offset:16;	size:8;	signed:0;
+	field:const struct iovec * vec;	offset:24;	size:8;	signed:0;
+	field:unsigned long vlen;	offset:32;	size:8;	signed:0;
+	field:unsigned long pos_l;	offset:40;	size:8;	signed:0;
+	field:unsigned long pos_h;	offset:48;	size:8;	signed:0;
+
+print fmt: "fd: 0x%08lx, vec: 0x%08lx, vlen: 0x%08lx, pos_l: 0x%08lx, pos_h: 0x%08lx", ((unsigned long)(REC->fd)), ((unsigned long)(REC->vec)), ((unsigned long)(REC->vlen)), ((unsigned long)(REC->pos_l)), ((unsigned long)(REC->pos_h))

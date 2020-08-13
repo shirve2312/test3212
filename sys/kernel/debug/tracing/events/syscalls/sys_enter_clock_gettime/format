@@ -1,0 +1,13 @@
+name: sys_enter_clock_gettime
+ID: 384
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:const clockid_t which_clock;	offset:16;	size:8;	signed:0;
+	field:struct __kernel_timespec * tp;	offset:24;	size:8;	signed:0;
+
+print fmt: "which_clock: 0x%08lx, tp: 0x%08lx", ((unsigned long)(REC->which_clock)), ((unsigned long)(REC->tp))

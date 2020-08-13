@@ -1,0 +1,16 @@
+name: sys_enter_clone
+ID: 130
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:unsigned long clone_flags;	offset:16;	size:8;	signed:0;
+	field:unsigned long newsp;	offset:24;	size:8;	signed:0;
+	field:int * parent_tidptr;	offset:32;	size:8;	signed:0;
+	field:int * child_tidptr;	offset:40;	size:8;	signed:0;
+	field:unsigned long tls;	offset:48;	size:8;	signed:0;
+
+print fmt: "clone_flags: 0x%08lx, newsp: 0x%08lx, parent_tidptr: 0x%08lx, child_tidptr: 0x%08lx, tls: 0x%08lx", ((unsigned long)(REC->clone_flags)), ((unsigned long)(REC->newsp)), ((unsigned long)(REC->parent_tidptr)), ((unsigned long)(REC->child_tidptr)), ((unsigned long)(REC->tls))

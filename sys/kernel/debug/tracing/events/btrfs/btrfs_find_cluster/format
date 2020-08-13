@@ -1,0 +1,17 @@
+name: btrfs_find_cluster
+ID: 1458
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 bg_objectid;	offset:24;	size:8;	signed:0;
+	field:u64 flags;	offset:32;	size:8;	signed:0;
+	field:u64 start;	offset:40;	size:8;	signed:0;
+	field:u64 bytes;	offset:48;	size:8;	signed:0;
+	field:u64 empty_size;	offset:56;	size:8;	signed:0;
+	field:u64 min_bytes;	offset:64;	size:8;	signed:0;
+
+print fmt: "%pU: block_group=%llu flags=%llu(%s) start=%llu len=%llu empty_size=%llu min_bytes=%llu", REC->fsid, REC->bg_objectid, REC->flags, __print_flags((unsigned long)REC->flags, "|", { (1ULL << 0), "DATA"}, { (1ULL << 1), "SYSTEM"}, { (1ULL << 2), "METADATA"}, { (1ULL << 3), "RAID0"}, { (1ULL << 4), "RAID1"}, { (1ULL << 5), "DUP"}, { (1ULL << 6), "RAID10"}, { (1ULL << 7), "RAID5"}, { (1ULL << 8), "RAID6"}), REC->start, REC->bytes, REC->empty_size, REC->min_bytes

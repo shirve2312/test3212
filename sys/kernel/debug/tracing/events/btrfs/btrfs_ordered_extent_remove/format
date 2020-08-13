@@ -1,0 +1,22 @@
+name: btrfs_ordered_extent_remove
+ID: 1483
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 ino;	offset:24;	size:8;	signed:0;
+	field:u64 file_offset;	offset:32;	size:8;	signed:0;
+	field:u64 start;	offset:40;	size:8;	signed:0;
+	field:u64 len;	offset:48;	size:8;	signed:0;
+	field:u64 disk_len;	offset:56;	size:8;	signed:0;
+	field:u64 bytes_left;	offset:64;	size:8;	signed:0;
+	field:unsigned long flags;	offset:72;	size:8;	signed:0;
+	field:int compress_type;	offset:80;	size:4;	signed:1;
+	field:int refs;	offset:84;	size:4;	signed:1;
+	field:u64 root_objectid;	offset:88;	size:8;	signed:0;
+	field:u64 truncated_len;	offset:96;	size:8;	signed:0;
+
+print fmt: "%pU: root=%llu(%s) ino=%llu file_offset=%llu start=%llu len=%llu disk_len=%llu truncated_len=%llu bytes_left=%llu flags=%s compress_type=%d refs=%d", REC->fsid, REC->root_objectid, ((REC->root_objectid >= -9ULL) || (REC->root_objectid >= 1ULL && REC->root_objectid <= 8ULL)) ? __print_symbolic(REC->root_objectid, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->ino, REC->file_offset, REC->start, REC->len, REC->disk_len, REC->truncated_len, REC->bytes_left, __print_flags(REC->flags, "|", { (1 << BTRFS_ORDERED_IO_DONE), "IO_DONE" }, { (1 << BTRFS_ORDERED_COMPLETE), "COMPLETE" }, { (1 << BTRFS_ORDERED_NOCOW), "NOCOW" }, { (1 << BTRFS_ORDERED_COMPRESSED), "COMPRESSED" }, { (1 << BTRFS_ORDERED_PREALLOC), "PREALLOC" }, { (1 << BTRFS_ORDERED_DIRECT), "DIRECT" }, { (1 << BTRFS_ORDERED_IOERR), "IOERR" }, { (1 << BTRFS_ORDERED_UPDATED_ISIZE), "UPDATED_ISIZE" }, { (1 << BTRFS_ORDERED_TRUNCATED), "TRUNCATED" }), REC->compress_type, REC->refs

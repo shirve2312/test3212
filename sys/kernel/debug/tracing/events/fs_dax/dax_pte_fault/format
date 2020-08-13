@@ -1,0 +1,17 @@
+name: dax_pte_fault
+ID: 925
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:unsigned long ino;	offset:8;	size:8;	signed:0;
+	field:unsigned long vm_flags;	offset:16;	size:8;	signed:0;
+	field:unsigned long address;	offset:24;	size:8;	signed:0;
+	field:unsigned long pgoff;	offset:32;	size:8;	signed:0;
+	field:dev_t dev;	offset:40;	size:4;	signed:0;
+	field:unsigned int flags;	offset:44;	size:4;	signed:0;
+	field:int result;	offset:48;	size:4;	signed:1;
+
+print fmt: "dev %d:%d ino %#lx %s %s address %#lx pgoff %#lx %s", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->ino, REC->vm_flags & 0x00000008 ? "shared" : "private", __print_flags(REC->flags, "|", { 0x01, "WRITE" }, { 0x02, "MKWRITE" }, { 0x04, "ALLOW_RETRY" }, { 0x08, "RETRY_NOWAIT" }, { 0x10, "KILLABLE" }, { 0x20, "TRIED" }, { 0x40, "USER" }, { 0x80, "REMOTE" }, { 0x100, "INSTRUCTION" }), REC->address, REC->pgoff, __print_flags(REC->result, "|", { VM_FAULT_OOM, "OOM" }, { VM_FAULT_SIGBUS, "SIGBUS" }, { VM_FAULT_MAJOR, "MAJOR" }, { VM_FAULT_WRITE, "WRITE" }, { VM_FAULT_HWPOISON, "HWPOISON" }, { VM_FAULT_HWPOISON_LARGE, "HWPOISON_LARGE" }, { VM_FAULT_SIGSEGV, "SIGSEGV" }, { VM_FAULT_NOPAGE, "NOPAGE" }, { VM_FAULT_LOCKED, "LOCKED" }, { VM_FAULT_RETRY, "RETRY" }, { VM_FAULT_FALLBACK, "FALLBACK" }, { VM_FAULT_DONE_COW, "DONE_COW" }, { VM_FAULT_NEEDDSYNC, "NEEDDSYNC" })

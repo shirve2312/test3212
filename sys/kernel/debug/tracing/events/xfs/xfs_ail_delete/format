@@ -1,0 +1,16 @@
+name: xfs_ail_delete
+ID: 1849
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:void * lip;	offset:16;	size:8;	signed:0;
+	field:uint type;	offset:24;	size:4;	signed:0;
+	field:unsigned long flags;	offset:32;	size:8;	signed:0;
+	field:xfs_lsn_t old_lsn;	offset:40;	size:8;	signed:1;
+	field:xfs_lsn_t new_lsn;	offset:48;	size:8;	signed:1;
+
+print fmt: "dev %d:%d lip %p old lsn %d/%d new lsn %d/%d type %s flags %s", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->lip, ((uint)((REC->old_lsn)>>32)), ((uint)(REC->old_lsn)), ((uint)((REC->new_lsn)>>32)), ((uint)(REC->new_lsn)), __print_symbolic(REC->type, { 0x1236, "XFS_LI_EFI" }, { 0x1237, "XFS_LI_EFD" }, { 0x1238, "XFS_LI_IUNLINK" }, { 0x123b, "XFS_LI_INODE" }, { 0x123c, "XFS_LI_BUF" }, { 0x123d, "XFS_LI_DQUOT" }, { 0x123e, "XFS_LI_QUOTAOFF" }, { 0x123f, "XFS_LI_ICREATE" }, { 0x1240, "XFS_LI_RUI" }, { 0x1241, "XFS_LI_RUD" }, { 0x1242, "XFS_LI_CUI" }, { 0x1243, "XFS_LI_CUD" }, { 0x1244, "XFS_LI_BUI" }, { 0x1245, "XFS_LI_BUD" }), __print_flags(REC->flags, "|", { (1 << 0), "IN_AIL" }, { (1 << 1), "ABORTED" }, { (1 << 2), "FAILED" }, { (1 << 3), "DIRTY" })

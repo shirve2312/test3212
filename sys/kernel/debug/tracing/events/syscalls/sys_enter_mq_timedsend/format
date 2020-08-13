@@ -1,0 +1,16 @@
+name: sys_enter_mq_timedsend
+ID: 1105
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:mqd_t mqdes;	offset:16;	size:8;	signed:0;
+	field:const char * u_msg_ptr;	offset:24;	size:8;	signed:0;
+	field:size_t msg_len;	offset:32;	size:8;	signed:0;
+	field:unsigned int msg_prio;	offset:40;	size:8;	signed:0;
+	field:const struct __kernel_timespec * u_abs_timeout;	offset:48;	size:8;	signed:0;
+
+print fmt: "mqdes: 0x%08lx, u_msg_ptr: 0x%08lx, msg_len: 0x%08lx, msg_prio: 0x%08lx, u_abs_timeout: 0x%08lx", ((unsigned long)(REC->mqdes)), ((unsigned long)(REC->u_msg_ptr)), ((unsigned long)(REC->msg_len)), ((unsigned long)(REC->msg_prio)), ((unsigned long)(REC->u_abs_timeout))

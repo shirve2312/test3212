@@ -1,0 +1,27 @@
+name: mce_record
+ID: 113
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u64 mcgcap;	offset:8;	size:8;	signed:0;
+	field:u64 mcgstatus;	offset:16;	size:8;	signed:0;
+	field:u64 status;	offset:24;	size:8;	signed:0;
+	field:u64 addr;	offset:32;	size:8;	signed:0;
+	field:u64 misc;	offset:40;	size:8;	signed:0;
+	field:u64 synd;	offset:48;	size:8;	signed:0;
+	field:u64 ipid;	offset:56;	size:8;	signed:0;
+	field:u64 ip;	offset:64;	size:8;	signed:0;
+	field:u64 tsc;	offset:72;	size:8;	signed:0;
+	field:u64 walltime;	offset:80;	size:8;	signed:0;
+	field:u32 cpu;	offset:88;	size:4;	signed:0;
+	field:u32 cpuid;	offset:92;	size:4;	signed:0;
+	field:u32 apicid;	offset:96;	size:4;	signed:0;
+	field:u32 socketid;	offset:100;	size:4;	signed:0;
+	field:u8 cs;	offset:104;	size:1;	signed:0;
+	field:u8 bank;	offset:105;	size:1;	signed:0;
+	field:u8 cpuvendor;	offset:106;	size:1;	signed:0;
+
+print fmt: "CPU: %d, MCGc/s: %llx/%llx, MC%d: %016Lx, IPID: %016Lx, ADDR/MISC/SYND: %016Lx/%016Lx/%016Lx, RIP: %02x:<%016Lx>, TSC: %llx, PROCESSOR: %u:%x, TIME: %llu, SOCKET: %u, APIC: %x", REC->cpu, REC->mcgcap, REC->mcgstatus, REC->bank, REC->status, REC->ipid, REC->addr, REC->misc, REC->synd, REC->cs, REC->ip, REC->tsc, REC->cpuvendor, REC->cpuid, REC->walltime, REC->socketid, REC->apicid

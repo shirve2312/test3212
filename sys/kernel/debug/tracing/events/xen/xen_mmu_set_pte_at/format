@@ -1,0 +1,14 @@
+name: xen_mmu_set_pte_at
+ID: 41
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:struct mm_struct * mm;	offset:8;	size:8;	signed:0;
+	field:unsigned long addr;	offset:16;	size:8;	signed:0;
+	field:pte_t * ptep;	offset:24;	size:8;	signed:0;
+	field:pteval_t pteval;	offset:32;	size:8;	signed:0;
+
+print fmt: "mm %p addr %lx ptep %p pteval %0*llx (raw %0*llx)", REC->mm, REC->addr, REC->ptep, (int)8 * 2, (unsigned long long)pte_val(native_make_pte(REC->pteval)), (int)8 * 2, (unsigned long long)REC->pteval

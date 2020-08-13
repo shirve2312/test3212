@@ -1,0 +1,20 @@
+name: xfs_reflink_compare_extents
+ID: 1568
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_ino_t src_ino;	offset:16;	size:8;	signed:0;
+	field:loff_t src_isize;	offset:24;	size:8;	signed:1;
+	field:loff_t src_disize;	offset:32;	size:8;	signed:1;
+	field:loff_t src_offset;	offset:40;	size:8;	signed:1;
+	field:size_t len;	offset:48;	size:8;	signed:0;
+	field:xfs_ino_t dest_ino;	offset:56;	size:8;	signed:0;
+	field:loff_t dest_isize;	offset:64;	size:8;	signed:1;
+	field:loff_t dest_disize;	offset:72;	size:8;	signed:1;
+	field:loff_t dest_offset;	offset:80;	size:8;	signed:1;
+
+print fmt: "dev %d:%d count %zd ino 0x%llx isize 0x%llx disize 0x%llx offset 0x%llx -> ino 0x%llx isize 0x%llx disize 0x%llx offset 0x%llx", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->len, REC->src_ino, REC->src_isize, REC->src_disize, REC->src_offset, REC->dest_ino, REC->dest_isize, REC->dest_disize, REC->dest_offset

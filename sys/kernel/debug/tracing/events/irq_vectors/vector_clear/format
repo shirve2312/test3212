@@ -1,0 +1,15 @@
+name: vector_clear
+ID: 68
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:unsigned int irq;	offset:8;	size:4;	signed:0;
+	field:unsigned int vector;	offset:12;	size:4;	signed:0;
+	field:unsigned int cpu;	offset:16;	size:4;	signed:0;
+	field:unsigned int prev_vector;	offset:20;	size:4;	signed:0;
+	field:unsigned int prev_cpu;	offset:24;	size:4;	signed:0;
+
+print fmt: "irq=%u vector=%u cpu=%u prev_vector=%u prev_cpu=%u", REC->irq, REC->vector, REC->cpu, REC->prev_vector, REC->prev_cpu

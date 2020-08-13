@@ -1,0 +1,20 @@
+name: irq_matrix_assign
+ID: 336
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int bit;	offset:8;	size:4;	signed:1;
+	field:unsigned int cpu;	offset:12;	size:4;	signed:0;
+	field:bool online;	offset:16;	size:1;	signed:0;
+	field:unsigned int available;	offset:20;	size:4;	signed:0;
+	field:unsigned int allocated;	offset:24;	size:4;	signed:0;
+	field:unsigned int managed;	offset:28;	size:4;	signed:0;
+	field:unsigned int online_maps;	offset:32;	size:4;	signed:0;
+	field:unsigned int global_available;	offset:36;	size:4;	signed:0;
+	field:unsigned int global_reserved;	offset:40;	size:4;	signed:0;
+	field:unsigned int total_allocated;	offset:44;	size:4;	signed:0;
+
+print fmt: "bit=%d cpu=%u online=%d avl=%u alloc=%u managed=%u online_maps=%u global_avl=%u, global_rsvd=%u, total_alloc=%u", REC->bit, REC->cpu, REC->online, REC->available, REC->allocated, REC->managed, REC->online_maps, REC->global_available, REC->global_reserved, REC->total_allocated

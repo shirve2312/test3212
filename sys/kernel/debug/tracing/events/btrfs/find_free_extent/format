@@ -1,0 +1,14 @@
+name: find_free_extent
+ID: 1461
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 num_bytes;	offset:24;	size:8;	signed:0;
+	field:u64 empty_size;	offset:32;	size:8;	signed:0;
+	field:u64 data;	offset:40;	size:8;	signed:0;
+
+print fmt: "%pU: root=%llu(%s) len=%llu empty_size=%llu flags=%llu(%s)", REC->fsid, 2ULL, ((2ULL >= -9ULL) || (2ULL >= 1ULL && 2ULL <= 8ULL)) ? __print_symbolic(2ULL, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->num_bytes, REC->empty_size, REC->data, __print_flags((unsigned long)REC->data, "|", { (1ULL << 0), "DATA"}, { (1ULL << 1), "SYSTEM"}, { (1ULL << 2), "METADATA"}, { (1ULL << 3), "RAID0"}, { (1ULL << 4), "RAID1"}, { (1ULL << 5), "DUP"}, { (1ULL << 6), "RAID10"}, { (1ULL << 7), "RAID5"}, { (1ULL << 8), "RAID6"})

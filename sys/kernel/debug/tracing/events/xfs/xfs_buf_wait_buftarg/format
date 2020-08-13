@@ -1,0 +1,18 @@
+name: xfs_buf_wait_buftarg
+ID: 1979
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_daddr_t bno;	offset:16;	size:8;	signed:1;
+	field:int nblks;	offset:24;	size:4;	signed:1;
+	field:int hold;	offset:28;	size:4;	signed:1;
+	field:int pincount;	offset:32;	size:4;	signed:1;
+	field:unsigned lockval;	offset:36;	size:4;	signed:0;
+	field:unsigned flags;	offset:40;	size:4;	signed:0;
+	field:unsigned long caller_ip;	offset:48;	size:8;	signed:0;
+
+print fmt: "dev %d:%d bno 0x%llx nblks 0x%x hold %d pincount %d lock %d flags %s caller %pS", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), (unsigned long long)REC->bno, REC->nblks, REC->hold, REC->pincount, REC->lockval, __print_flags(REC->flags, "|", { (1 << 0), "READ" }, { (1 << 1), "WRITE" }, { (1 << 2), "READ_AHEAD" }, { (1 << 3), "NO_IOACCT" }, { (1 << 4), "ASYNC" }, { (1 << 5), "DONE" }, { (1 << 6), "STALE" }, { (1 << 7), "WRITE_FAIL" }, { (1 << 16), "TRYLOCK" }, { (1 << 17), "UNMAPPED" }, { (1 << 20), "PAGES" }, { (1 << 21), "KMEM" }, { (1 << 22), "DELWRI_Q" }), (void *)REC->caller_ip

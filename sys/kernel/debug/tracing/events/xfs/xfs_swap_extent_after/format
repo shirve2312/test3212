@@ -1,0 +1,17 @@
+name: xfs_swap_extent_after
+ID: 1698
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:int which;	offset:12;	size:4;	signed:1;
+	field:xfs_ino_t ino;	offset:16;	size:8;	signed:0;
+	field:int format;	offset:24;	size:4;	signed:1;
+	field:int nex;	offset:28;	size:4;	signed:1;
+	field:int broot_size;	offset:32;	size:4;	signed:1;
+	field:int fork_off;	offset:36;	size:4;	signed:1;
+
+print fmt: "dev %d:%d ino 0x%llx (%s), %s format, num_extents %d, broot size %d, fork offset %d", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->ino, __print_symbolic(REC->which, { 0, "target" }, { 1, "temp" }), __print_symbolic(REC->format, { 0, "dev" }, { 1, "local" }, { 2, "extent" }, { 3, "btree" }, { 4, "uuid" }), REC->nex, REC->broot_size, REC->fork_off

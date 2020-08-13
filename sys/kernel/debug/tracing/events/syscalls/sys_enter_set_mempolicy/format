@@ -1,0 +1,14 @@
+name: sys_enter_set_mempolicy
+ID: 600
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:int mode;	offset:16;	size:8;	signed:0;
+	field:const unsigned long * nmask;	offset:24;	size:8;	signed:0;
+	field:unsigned long maxnode;	offset:32;	size:8;	signed:0;
+
+print fmt: "mode: 0x%08lx, nmask: 0x%08lx, maxnode: 0x%08lx", ((unsigned long)(REC->mode)), ((unsigned long)(REC->nmask)), ((unsigned long)(REC->maxnode))

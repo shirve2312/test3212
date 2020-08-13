@@ -1,0 +1,15 @@
+name: sys_enter_mq_open
+ID: 1109
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:const char * u_name;	offset:16;	size:8;	signed:0;
+	field:int oflag;	offset:24;	size:8;	signed:0;
+	field:umode_t mode;	offset:32;	size:8;	signed:0;
+	field:struct mq_attr * u_attr;	offset:40;	size:8;	signed:0;
+
+print fmt: "u_name: 0x%08lx, oflag: 0x%08lx, mode: 0x%08lx, u_attr: 0x%08lx", ((unsigned long)(REC->u_name)), ((unsigned long)(REC->oflag)), ((unsigned long)(REC->mode)), ((unsigned long)(REC->u_attr))

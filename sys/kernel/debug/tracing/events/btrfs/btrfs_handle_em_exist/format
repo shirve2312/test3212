@@ -1,0 +1,17 @@
+name: btrfs_handle_em_exist
+ID: 1489
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 e_start;	offset:24;	size:8;	signed:0;
+	field:u64 e_len;	offset:32;	size:8;	signed:0;
+	field:u64 map_start;	offset:40;	size:8;	signed:0;
+	field:u64 map_len;	offset:48;	size:8;	signed:0;
+	field:u64 start;	offset:56;	size:8;	signed:0;
+	field:u64 len;	offset:64;	size:8;	signed:0;
+
+print fmt: "%pU: start=%llu len=%llu existing(start=%llu len=%llu) em(start=%llu len=%llu)", REC->fsid, REC->start, REC->len, REC->e_start, REC->e_len, REC->map_start, REC->map_len

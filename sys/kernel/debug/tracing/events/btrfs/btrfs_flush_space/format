@@ -1,0 +1,15 @@
+name: btrfs_flush_space
+ID: 1464
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 flags;	offset:24;	size:8;	signed:0;
+	field:u64 num_bytes;	offset:32;	size:8;	signed:0;
+	field:int state;	offset:40;	size:4;	signed:1;
+	field:int ret;	offset:44;	size:4;	signed:1;
+
+print fmt: "%pU: state=%d(%s) flags=%llu(%s) num_bytes=%llu ret=%d", REC->fsid, REC->state, __print_symbolic(REC->state, { 1, "FLUSH_DELAYED_ITEMS_NR"}, { 2, "FLUSH_DELAYED_ITEMS"}, { 5, "FLUSH_DELALLOC"}, { 6, "FLUSH_DELALLOC_WAIT"}, { FLUSH_DELAYED_REFS_NR, "FLUSH_DELAYED_REFS_NR"}, { FLUSH_DELAYED_REFS, "FLUSH_ELAYED_REFS"}, { 7, "ALLOC_CHUNK"}, { ALLOC_CHUNK_FORCE, "ALLOC_CHUNK_FORCE"}, { 9, "COMMIT_TRANS"}), REC->flags, __print_flags((unsigned long)REC->flags, "|", { (1ULL << 0), "DATA"}, { (1ULL << 1), "SYSTEM"}, { (1ULL << 2), "METADATA"}, { (1ULL << 3), "RAID0"}, { (1ULL << 4), "RAID1"}, { (1ULL << 5), "DUP"}, { (1ULL << 6), "RAID10"}, { (1ULL << 7), "RAID5"}, { (1ULL << 8), "RAID6"}), REC->num_bytes, REC->ret

@@ -1,0 +1,17 @@
+name: btrfs_ordered_sched
+ID: 1450
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:const void * work;	offset:24;	size:8;	signed:0;
+	field:const void * wq;	offset:32;	size:8;	signed:0;
+	field:const void * func;	offset:40;	size:8;	signed:0;
+	field:const void * ordered_func;	offset:48;	size:8;	signed:0;
+	field:const void * ordered_free;	offset:56;	size:8;	signed:0;
+	field:const void * normal_work;	offset:64;	size:8;	signed:0;
+
+print fmt: "%pU: work=%p (normal_work=%p) wq=%p func=%ps ordered_func=%p ordered_free=%p", REC->fsid, REC->work, REC->normal_work, REC->wq, REC->func, REC->ordered_func, REC->ordered_free

@@ -1,0 +1,15 @@
+name: sys_enter_semtimedop
+ID: 1085
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:int semid;	offset:16;	size:8;	signed:0;
+	field:struct sembuf * tsops;	offset:24;	size:8;	signed:0;
+	field:unsigned int nsops;	offset:32;	size:8;	signed:0;
+	field:const struct __kernel_timespec * timeout;	offset:40;	size:8;	signed:0;
+
+print fmt: "semid: 0x%08lx, tsops: 0x%08lx, nsops: 0x%08lx, timeout: 0x%08lx", ((unsigned long)(REC->semid)), ((unsigned long)(REC->tsops)), ((unsigned long)(REC->nsops)), ((unsigned long)(REC->timeout))

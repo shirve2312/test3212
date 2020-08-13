@@ -1,0 +1,15 @@
+name: run_delayed_ref_head
+ID: 1470
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 bytenr;	offset:24;	size:8;	signed:0;
+	field:u64 num_bytes;	offset:32;	size:8;	signed:0;
+	field:int action;	offset:40;	size:4;	signed:1;
+	field:int is_data;	offset:44;	size:4;	signed:1;
+
+print fmt: "%pU: bytenr=%llu num_bytes=%llu action=%s is_data=%d", REC->fsid, REC->bytenr, REC->num_bytes, __print_symbolic(REC->action, { 1, "ADD_DELAYED_REF" }, { 2, "DROP_DELAYED_REF" }, { 3, "ADD_DELAYED_EXTENT" }, { 4, "UPDATE_DELAYED_HEAD" }), REC->is_data

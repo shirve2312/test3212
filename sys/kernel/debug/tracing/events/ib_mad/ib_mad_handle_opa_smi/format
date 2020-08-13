@@ -1,0 +1,17 @@
+name: ib_mad_handle_opa_smi
+ID: 1505
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u64 mkey;	offset:8;	size:8;	signed:0;
+	field:u32 dr_slid;	offset:16;	size:4;	signed:0;
+	field:u32 dr_dlid;	offset:20;	size:4;	signed:0;
+	field:u8 hop_ptr;	offset:24;	size:1;	signed:0;
+	field:u8 hop_cnt;	offset:25;	size:1;	signed:0;
+	field:u8 initial_path[64];	offset:26;	size:64;	signed:0;
+	field:u8 return_path[64];	offset:90;	size:64;	signed:0;
+
+print fmt: "OPA SMP: hop_ptr %d hop_cnt %d mkey 0x%016llx dr_slid 0x%08x dr_dlid 0x%08x initial_path %*ph return_path %*ph ", REC->hop_ptr, REC->hop_cnt, (__u64)__builtin_bswap64((__u64)(( __u64)(__be64)(REC->mkey))), (__u32)__builtin_bswap32((__u32)(( __u32)(__be32)(REC->dr_slid))), (__u32)__builtin_bswap32((__u32)(( __u32)(__be32)(REC->dr_dlid))), 64, REC->initial_path, 64, REC->return_path

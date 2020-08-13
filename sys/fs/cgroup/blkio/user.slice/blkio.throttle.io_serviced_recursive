@@ -1,0 +1,19 @@
+7:2 Read 1871
+7:2 Write 0
+7:2 Sync 1871
+7:2 Async 0
+7:2 Discard 0
+7:2 Total 1871
+7:0 Read 1096
+7:0 Write 0
+7:0 Sync 1096
+7:0 Async 0
+7:0 Discard 0
+7:0 Total 1096
+202:0 Read 33104
+202:0 Write 23258
+202:0 Sync 40092
+202:0 Async 16270
+202:0 Discard 0
+202:0 Total 56362
+Total 59329

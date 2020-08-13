@@ -1,0 +1,17 @@
+name: xfs_free_extent
+ID: 1813
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_agnumber_t agno;	offset:12;	size:4;	signed:0;
+	field:xfs_agblock_t agbno;	offset:16;	size:4;	signed:0;
+	field:xfs_extlen_t len;	offset:20;	size:4;	signed:0;
+	field:int resv;	offset:24;	size:4;	signed:1;
+	field:int haveleft;	offset:28;	size:4;	signed:1;
+	field:int haveright;	offset:32;	size:4;	signed:1;
+
+print fmt: "dev %d:%d agno %u agbno %u len %u resv %d %s", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->agno, REC->agbno, REC->len, REC->resv, REC->haveleft ? (REC->haveright ? "both" : "left") : (REC->haveright ? "right" : "none")

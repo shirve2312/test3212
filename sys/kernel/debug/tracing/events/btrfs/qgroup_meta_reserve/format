@@ -1,0 +1,14 @@
+name: qgroup_meta_reserve
+ID: 1439
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 refroot;	offset:24;	size:8;	signed:0;
+	field:s64 diff;	offset:32;	size:8;	signed:1;
+	field:int type;	offset:40;	size:4;	signed:1;
+
+print fmt: "%pU: refroot=%llu(%s) type=%s diff=%lld", REC->fsid, REC->refroot, ((REC->refroot >= -9ULL) || (REC->refroot >= 1ULL && REC->refroot <= 8ULL)) ? __print_symbolic(REC->refroot, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", __print_symbolic(REC->type, { BTRFS_QGROUP_RSV_DATA, "DATA" }, { BTRFS_QGROUP_RSV_META_PERTRANS, "META_PERTRANS" }, { BTRFS_QGROUP_RSV_META_PREALLOC, "META_PREALLOC" }), REC->diff

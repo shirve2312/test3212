@@ -1,0 +1,29 @@
+name: xfs_alloc_vextent_badargs
+ID: 1792
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_agnumber_t agno;	offset:12;	size:4;	signed:0;
+	field:xfs_agblock_t agbno;	offset:16;	size:4;	signed:0;
+	field:xfs_extlen_t minlen;	offset:20;	size:4;	signed:0;
+	field:xfs_extlen_t maxlen;	offset:24;	size:4;	signed:0;
+	field:xfs_extlen_t mod;	offset:28;	size:4;	signed:0;
+	field:xfs_extlen_t prod;	offset:32;	size:4;	signed:0;
+	field:xfs_extlen_t minleft;	offset:36;	size:4;	signed:0;
+	field:xfs_extlen_t total;	offset:40;	size:4;	signed:0;
+	field:xfs_extlen_t alignment;	offset:44;	size:4;	signed:0;
+	field:xfs_extlen_t minalignslop;	offset:48;	size:4;	signed:0;
+	field:xfs_extlen_t len;	offset:52;	size:4;	signed:0;
+	field:short type;	offset:56;	size:2;	signed:1;
+	field:short otype;	offset:58;	size:2;	signed:1;
+	field:char wasdel;	offset:60;	size:1;	signed:1;
+	field:char wasfromfl;	offset:61;	size:1;	signed:1;
+	field:int resv;	offset:64;	size:4;	signed:1;
+	field:int datatype;	offset:68;	size:4;	signed:1;
+	field:xfs_fsblock_t firstblock;	offset:72;	size:8;	signed:0;
+
+print fmt: "dev %d:%d agno %u agbno %u minlen %u maxlen %u mod %u prod %u minleft %u total %u alignment %u minalignslop %u len %u type %s otype %s wasdel %d wasfromfl %d resv %d datatype 0x%x firstblock 0x%llx", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->agno, REC->agbno, REC->minlen, REC->maxlen, REC->mod, REC->prod, REC->minleft, REC->total, REC->alignment, REC->minalignslop, REC->len, __print_symbolic(REC->type, { 0x02, "FIRST_AG" }, { 0x08, "THIS_AG" }, { 0x10, "START_BNO" }, { 0x20, "NEAR_BNO" }, { 0x40, "THIS_BNO" }), __print_symbolic(REC->otype, { 0x02, "FIRST_AG" }, { 0x08, "THIS_AG" }, { 0x10, "START_BNO" }, { 0x20, "NEAR_BNO" }, { 0x40, "THIS_BNO" }), REC->wasdel, REC->wasfromfl, REC->resv, REC->datatype, (unsigned long long)REC->firstblock

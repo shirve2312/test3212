@@ -1,0 +1,21 @@
+name: xfs_dqget_hit
+ID: 1882
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:u32 id;	offset:12;	size:4;	signed:0;
+	field:unsigned flags;	offset:16;	size:4;	signed:0;
+	field:unsigned nrefs;	offset:20;	size:4;	signed:0;
+	field:unsigned long long res_bcount;	offset:24;	size:8;	signed:0;
+	field:unsigned long long bcount;	offset:32;	size:8;	signed:0;
+	field:unsigned long long icount;	offset:40;	size:8;	signed:0;
+	field:unsigned long long blk_hardlimit;	offset:48;	size:8;	signed:0;
+	field:unsigned long long blk_softlimit;	offset:56;	size:8;	signed:0;
+	field:unsigned long long ino_hardlimit;	offset:64;	size:8;	signed:0;
+	field:unsigned long long ino_softlimit;	offset:72;	size:8;	signed:0;
+
+print fmt: "dev %d:%d id 0x%x flags %s nrefs %u res_bc 0x%llx bcnt 0x%llx bhardlimit 0x%llx bsoftlimit 0x%llx icnt 0x%llx ihardlimit 0x%llx isoftlimit 0x%llx]", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->id, __print_flags(REC->flags, "|", { 0x0001, "USER" }, { 0x0002, "PROJ" }, { 0x0004, "GROUP" }, { 0x0008, "DIRTY" }, { 0x0010, "FREEING" }), REC->nrefs, REC->res_bcount, REC->bcount, REC->blk_hardlimit, REC->blk_softlimit, REC->icount, REC->ino_hardlimit, REC->ino_softlimit

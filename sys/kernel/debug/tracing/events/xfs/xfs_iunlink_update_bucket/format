@@ -1,0 +1,15 @@
+name: xfs_iunlink_update_bucket
+ID: 1533
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_agnumber_t agno;	offset:12;	size:4;	signed:0;
+	field:unsigned int bucket;	offset:16;	size:4;	signed:0;
+	field:xfs_agino_t old_ptr;	offset:20;	size:4;	signed:0;
+	field:xfs_agino_t new_ptr;	offset:24;	size:4;	signed:0;
+
+print fmt: "dev %d:%d agno %u bucket %u old 0x%x new 0x%x", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->agno, REC->bucket, REC->old_ptr, REC->new_ptr

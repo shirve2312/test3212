@@ -1,0 +1,17 @@
+name: xfs_bunmap
+ID: 1822
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_ino_t ino;	offset:16;	size:8;	signed:0;
+	field:xfs_fsize_t size;	offset:24;	size:8;	signed:1;
+	field:xfs_fileoff_t bno;	offset:32;	size:8;	signed:0;
+	field:xfs_filblks_t len;	offset:40;	size:8;	signed:0;
+	field:unsigned long caller_ip;	offset:48;	size:8;	signed:0;
+	field:int flags;	offset:56;	size:4;	signed:1;
+
+print fmt: "dev %d:%d ino 0x%llx size 0x%llx bno 0x%llx len 0x%llxflags %s caller %pS", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->ino, REC->size, REC->bno, REC->len, __print_flags(REC->flags, "|", { 0x001, "ENTIRE" }, { 0x002, "METADATA" }, { 0x004, "ATTRFORK" }, { 0x008, "PREALLOC" }, { 0x020, "CONTIG" }, { 0x040, "CONVERT" }, { 0x080, "ZERO" }, { 0x100, "REMAP" }, { 0x200, "COWFORK" }, { 0x1000, "NODISCARD" }, { 0x2000, "NORMAP" }), (void *)REC->caller_ip

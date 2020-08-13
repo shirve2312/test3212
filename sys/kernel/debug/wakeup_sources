@@ -1,0 +1,12 @@
+name		active_count	event_count	wakeup_count	expire_count	active_since	total_time	max_time	last_change	prevent_suspend_time
+alarmtimer  	0		0		0		0		0		0		0		0		0
+00:02       	242		242		0		0		0		10		0		161928393		0
+LNXSLPBN:00 	0		0		0		0		0		0		0		0		0
+LNXPWRBN:00 	0		0		0		0		0		0		0		0		0
+PNP0A03:00  	0		0		0		0		0		0		0		0		0
+device:1a   	0		0		0		0		0		0		0		0		0
+device:00   	0		0		0		0		0		0		0		0		0
+device:0d   	0		0		0		0		0		0		0		0		0
+device:0b   	0		0		0		0		0		0		0		0		0
+device:01   	0		0		0		0		0		0		0		0		0
+device:02   	0		0		0		0		0		0		0		0		0

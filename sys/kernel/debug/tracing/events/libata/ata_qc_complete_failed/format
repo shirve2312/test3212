@@ -1,0 +1,27 @@
+name: ata_qc_complete_failed
+ID: 1229
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:unsigned int ata_port;	offset:8;	size:4;	signed:0;
+	field:unsigned int ata_dev;	offset:12;	size:4;	signed:0;
+	field:unsigned int tag;	offset:16;	size:4;	signed:0;
+	field:unsigned char status;	offset:20;	size:1;	signed:0;
+	field:unsigned char dev;	offset:21;	size:1;	signed:0;
+	field:unsigned char lbal;	offset:22;	size:1;	signed:0;
+	field:unsigned char lbam;	offset:23;	size:1;	signed:0;
+	field:unsigned char lbah;	offset:24;	size:1;	signed:0;
+	field:unsigned char nsect;	offset:25;	size:1;	signed:0;
+	field:unsigned char error;	offset:26;	size:1;	signed:0;
+	field:unsigned char hob_lbal;	offset:27;	size:1;	signed:0;
+	field:unsigned char hob_lbam;	offset:28;	size:1;	signed:0;
+	field:unsigned char hob_lbah;	offset:29;	size:1;	signed:0;
+	field:unsigned char hob_nsect;	offset:30;	size:1;	signed:0;
+	field:unsigned char hob_feature;	offset:31;	size:1;	signed:0;
+	field:unsigned char ctl;	offset:32;	size:1;	signed:0;
+	field:unsigned long flags;	offset:40;	size:8;	signed:0;
+
+print fmt: "ata_port=%u ata_dev=%u tag=%d flags=%s status=%s  res=(%02x/%02x:%02x:%02x:%02x:%02x/%02x:%02x:%02x:%02x:%02x/%02x)", REC->ata_port, REC->ata_dev, REC->tag, libata_trace_parse_qc_flags(p, REC->flags), libata_trace_parse_status(p, REC->status), REC->status, REC->error, REC->nsect, REC->lbal, REC->lbam, REC->lbah, REC->hob_feature, REC->hob_nsect, REC->hob_lbal, REC->hob_lbam, REC->hob_lbah, REC->dev

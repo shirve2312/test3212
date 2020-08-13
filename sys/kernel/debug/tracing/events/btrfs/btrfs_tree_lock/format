@@ -1,0 +1,18 @@
+name: btrfs_tree_lock
+ID: 1426
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:u64 block;	offset:24;	size:8;	signed:0;
+	field:u64 generation;	offset:32;	size:8;	signed:0;
+	field:u64 start_ns;	offset:40;	size:8;	signed:0;
+	field:u64 end_ns;	offset:48;	size:8;	signed:0;
+	field:u64 diff_ns;	offset:56;	size:8;	signed:0;
+	field:u64 owner;	offset:64;	size:8;	signed:0;
+	field:int is_log_tree;	offset:72;	size:4;	signed:1;
+
+print fmt: "%pU: block=%llu generation=%llu start_ns=%llu end_ns=%llu diff_ns=%llu owner=%llu is_log_tree=%d", REC->fsid, REC->block, REC->generation, REC->start_ns, REC->end_ns, REC->diff_ns, REC->owner, REC->is_log_tree

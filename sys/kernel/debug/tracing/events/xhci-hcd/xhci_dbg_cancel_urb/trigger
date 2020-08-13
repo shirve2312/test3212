@@ -1,0 +1,2 @@
+# Available triggers:
+# traceon traceoff snapshot stacktrace enable_event disable_event enable_hist disable_hist hist

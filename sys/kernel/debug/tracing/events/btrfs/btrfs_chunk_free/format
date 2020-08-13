@@ -1,0 +1,17 @@
+name: btrfs_chunk_free
+ID: 1468
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:u8 fsid[16];	offset:8;	size:16;	signed:0;
+	field:int num_stripes;	offset:24;	size:4;	signed:1;
+	field:u64 type;	offset:32;	size:8;	signed:0;
+	field:int sub_stripes;	offset:40;	size:4;	signed:1;
+	field:u64 offset;	offset:48;	size:8;	signed:0;
+	field:u64 size;	offset:56;	size:8;	signed:0;
+	field:u64 root_objectid;	offset:64;	size:8;	signed:0;
+
+print fmt: "%pU: root=%llu(%s) offset=%llu size=%llu num_stripes=%d sub_stripes=%d type=%s", REC->fsid, REC->root_objectid, ((REC->root_objectid >= -9ULL) || (REC->root_objectid >= 1ULL && REC->root_objectid <= 8ULL)) ? __print_symbolic(REC->root_objectid, { 1ULL, "ROOT_TREE" }, { 2ULL, "EXTENT_TREE" }, { 3ULL, "CHUNK_TREE" }, { 4ULL, "DEV_TREE" }, { 5ULL, "FS_TREE" }, { 6ULL, "ROOT_TREE_DIR" }, { 7ULL, "CSUM_TREE" }, { -6ULL, "TREE_LOG" }, { 8ULL, "QUOTA_TREE" }, { -8ULL, "TREE_RELOC" }, { 9ULL, "UUID_TREE" }, { 10ULL, "FREE_SPACE_TREE" }, { -9ULL, "DATA_RELOC_TREE" }) : "-", REC->offset, REC->size, REC->num_stripes, REC->sub_stripes, __print_flags(REC->type, "|", { (1ULL << 0), "DATA" }, { (1ULL << 1), "SYSTEM"}, { (1ULL << 2), "METADATA"}, { (1ULL << 3), "RAID0" }, { (1ULL << 4), "RAID1" }, { (1ULL << 5), "DUP" }, { (1ULL << 6), "RAID10"}, { (1ULL << 7), "RAID5" }, { (1ULL << 8), "RAID6" })

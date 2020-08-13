@@ -1,0 +1,13 @@
+name: xen_mmu_set_p4d
+ID: 38
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:p4d_t * p4dp;	offset:8;	size:8;	signed:0;
+	field:p4d_t * user_p4dp;	offset:16;	size:8;	signed:0;
+	field:p4dval_t p4dval;	offset:24;	size:8;	signed:0;
+
+print fmt: "p4dp %p user_p4dp %p p4dval %0*llx (raw %0*llx)", REC->p4dp, REC->user_p4dp, (int)8 * 2, (unsigned long long)pgd_val(native_make_pgd(REC->p4dval)), (int)8 * 2, (unsigned long long)REC->p4dval

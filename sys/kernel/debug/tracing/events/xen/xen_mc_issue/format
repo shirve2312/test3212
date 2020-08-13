@@ -1,0 +1,11 @@
+name: xen_mc_issue
+ID: 49
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:enum paravirt_lazy_mode mode;	offset:8;	size:4;	signed:0;
+
+print fmt: "start batch LAZY_%s", (REC->mode == PARAVIRT_LAZY_MMU) ? "MMU" : (REC->mode == PARAVIRT_LAZY_CPU) ? "CPU" : "NONE"

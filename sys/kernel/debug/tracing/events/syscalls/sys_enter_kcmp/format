@@ -1,0 +1,16 @@
+name: sys_enter_kcmp
+ID: 349
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:int __syscall_nr;	offset:8;	size:4;	signed:1;
+	field:pid_t pid1;	offset:16;	size:8;	signed:0;
+	field:pid_t pid2;	offset:24;	size:8;	signed:0;
+	field:int type;	offset:32;	size:8;	signed:0;
+	field:unsigned long idx1;	offset:40;	size:8;	signed:0;
+	field:unsigned long idx2;	offset:48;	size:8;	signed:0;
+
+print fmt: "pid1: 0x%08lx, pid2: 0x%08lx, type: 0x%08lx, idx1: 0x%08lx, idx2: 0x%08lx", ((unsigned long)(REC->pid1)), ((unsigned long)(REC->pid2)), ((unsigned long)(REC->type)), ((unsigned long)(REC->idx1)), ((unsigned long)(REC->idx2))

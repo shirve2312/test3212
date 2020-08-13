@@ -1,0 +1,21 @@
+name: xfs_attr_list_add
+ID: 2025
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_ino_t ino;	offset:16;	size:8;	signed:0;
+	field:u32 hashval;	offset:24;	size:4;	signed:0;
+	field:u32 blkno;	offset:28;	size:4;	signed:0;
+	field:u32 offset;	offset:32;	size:4;	signed:0;
+	field:void * alist;	offset:40;	size:8;	signed:0;
+	field:int bufsize;	offset:48;	size:4;	signed:1;
+	field:int count;	offset:52;	size:4;	signed:1;
+	field:int firstu;	offset:56;	size:4;	signed:1;
+	field:int dupcnt;	offset:60;	size:4;	signed:1;
+	field:int flags;	offset:64;	size:4;	signed:1;
+
+print fmt: "dev %d:%d ino 0x%llx cursor h/b/o 0x%x/0x%x/%u dupcnt %u alist %p size %u count %u firstu %u flags %d %s", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->ino, REC->hashval, REC->blkno, REC->offset, REC->dupcnt, REC->alist, REC->bufsize, REC->count, REC->firstu, REC->flags, __print_flags(REC->flags, "|", { 0x0001, "DONTFOLLOW" }, { 0x0002, "ROOT" }, { 0x0004, "TRUST" }, { 0x0008, "SECURE" }, { 0x0010, "CREATE" }, { 0x0020, "REPLACE" }, { 0x1000, "KERNOTIME" }, { 0x2000, "KERNOVAL" }, { 0x4000, "INCOMPLETE" })

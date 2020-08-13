@@ -1,0 +1,16 @@
+name: xfs_reflink_remap_blocks_loop
+ID: 1577
+format:
+	field:unsigned short common_type;	offset:0;	size:2;	signed:0;
+	field:unsigned char common_flags;	offset:2;	size:1;	signed:0;
+	field:unsigned char common_preempt_count;	offset:3;	size:1;	signed:0;
+	field:int common_pid;	offset:4;	size:4;	signed:1;
+
+	field:dev_t dev;	offset:8;	size:4;	signed:0;
+	field:xfs_ino_t src_ino;	offset:16;	size:8;	signed:0;
+	field:xfs_fileoff_t src_lblk;	offset:24;	size:8;	signed:0;
+	field:xfs_filblks_t len;	offset:32;	size:8;	signed:0;
+	field:xfs_ino_t dest_ino;	offset:40;	size:8;	signed:0;
+	field:xfs_fileoff_t dest_lblk;	offset:48;	size:8;	signed:0;
+
+print fmt: "dev %d:%d len 0x%llx ino 0x%llx offset 0x%llx blocks -> ino 0x%llx offset 0x%llx blocks", ((unsigned int) ((REC->dev) >> 20)), ((unsigned int) ((REC->dev) & ((1U << 20) - 1))), REC->len, REC->src_ino, REC->src_lblk, REC->dest_ino, REC->dest_lblk
